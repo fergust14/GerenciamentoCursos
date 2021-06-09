@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoCursos.Services
 {
-    public class TiposService
+    public class CursoService
     {
         private readonly GerenciamentoCursosContext _context;
 
-        public TiposService(GerenciamentoCursosContext context)
+        public CursoService(GerenciamentoCursosContext context)
         {
             _context = context;
         }
-        public List<Tipos> FindAll()
+        public List<Curso> FindAll()
         {
-            return _context.Tipos.ToList();
+            return _context.Curso.ToList();
         }
-        public void Insert(Tipos obj)
-        {
+
+        internal void Insert(Curso obj)
+        {            
             _context.Add(obj);
             _context.SaveChanges();
         }

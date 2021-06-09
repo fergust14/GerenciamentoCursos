@@ -3,14 +3,16 @@ using System;
 using GerenciamentoCursos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GerenciamentoCursos.Migrations
 {
     [DbContext(typeof(GerenciamentoCursosContext))]
-    partial class GerenciamentoCursosContextModelSnapshot : ModelSnapshot
+    [Migration("20210609171253_ChaveEstrangeira")]
+    partial class ChaveEstrangeira
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,16 +71,16 @@ namespace GerenciamentoCursos.Migrations
                     b.ToTable("Oferta");
                 });
 
-            modelBuilder.Entity("GerenciamentoCursos.Models.Tipo", b =>
+            modelBuilder.Entity("GerenciamentoCursos.Models.Tipos", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("TipoCurso");
+                    b.Property<string>("Tipo");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipo");
+                    b.ToTable("Tipos");
                 });
 
             modelBuilder.Entity("GerenciamentoCursos.Models.Curso", b =>
@@ -87,7 +89,7 @@ namespace GerenciamentoCursos.Migrations
                         .WithMany("Cursos")
                         .HasForeignKey("LocalidadeId");
 
-                    b.HasOne("GerenciamentoCursos.Models.Tipo", "Tipo")
+                    b.HasOne("GerenciamentoCursos.Models.Tipos", "Tipo")
                         .WithMany()
                         .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.Cascade);

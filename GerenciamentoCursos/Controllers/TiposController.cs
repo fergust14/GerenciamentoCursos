@@ -8,16 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using GerenciamentoCursos.Data;
 using GerenciamentoCursos.Models;
 using GerenciamentoCursos.Services;
+using GerenciamentoCursos.Models.ViewModels;
 
 namespace GerenciamentoCursos.Controllers
 {
     public class TiposController : Controller
     {
-        private readonly TiposService _tiposService;
-
-        public TiposController(TiposService tiposService)
+        private readonly TipoService _tiposService;
+        
+        public TiposController(TipoService tiposService)
         {
-            _tiposService = tiposService;
+            _tiposService = tiposService;           
         }
         public IActionResult Index()
         {
@@ -27,12 +28,11 @@ namespace GerenciamentoCursos.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+           return View();
         }
-
-       [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Tipos tipos)
+        public IActionResult Create(Tipo tipos)
         {
             _tiposService.Insert(tipos);
             return RedirectToAction(nameof(Index));

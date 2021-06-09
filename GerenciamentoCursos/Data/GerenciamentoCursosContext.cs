@@ -17,6 +17,6 @@ namespace GerenciamentoCursos.Data
         public DbSet<GerenciamentoCursos.Models.Curso> Curso { get; set; }
         public DbSet<Oferta> Oferta { get; set; }
         public DbSet<Localidade> Localidade { get; set; }
-        public DbSet<GerenciamentoCursos.Models.Tipos> Tipos { get; set; }
+        public DbSet<GerenciamentoCursos.Models.Tipo> Tipo { get; set; }
     }
 }

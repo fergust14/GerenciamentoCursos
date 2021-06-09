@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoCursos.Models
 {
-    public class Tipos
+    public class Tipo
     {
         public int Id { get; set; }
-        public string Tipo { get; set; }
+        public string TipoCurso { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GerenciamentoCursos.Models.Tipos>
+﻿@model IEnumerable<GerenciamentoCursos.Models.Tipo>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Id)</th>
-            <th>@Html.DisplayNameFor(model => model.Tipo)</th>            
+            <th>@Html.DisplayNameFor(model => model.TipoCurso)</th>            
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
         {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Id)</td>
-            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+            <td>@Html.DisplayFor(modelItem => item.TipoCurso)</td>
             <td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
             <td><a asp-action="Details" asp-route-id="@item.Id">Details</a></td>
             <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>

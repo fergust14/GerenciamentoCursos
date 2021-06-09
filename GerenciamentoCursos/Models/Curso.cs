@@ -10,13 +10,14 @@ namespace GerenciamentoCursos.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public ICollection<Oferta> Disponibilidade { get; set; } = new List<Oferta>();
-        public Tipos Tipo { get; set; }
+        public Tipo Tipo { get; set; }
+        public int TipoId { get; set; }
 
         public Curso()
         {
 
         }
-        public Curso(int id, string nome, Tipos tipo)
+        public Curso(int id, string nome, Tipo tipo)
         {
             Id = id;
             Nome = nome;

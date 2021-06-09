@@ -42,7 +42,8 @@ namespace GerenciamentoCursos
                         builder.MigrationsAssembly("GerenciamentoCursos")));
 
             services.AddScoped<OfertaService>();
-            services.AddScoped<TiposService>();
+            services.AddScoped<TipoService>();
+            services.AddScoped<CursoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
