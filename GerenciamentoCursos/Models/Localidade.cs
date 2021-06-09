@@ -10,8 +10,7 @@ namespace GerenciamentoCursos.Models
         public int Id { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
-        public ICollection<Curso> Cursos { get; set; } = new List<Curso>();
-
+        
         public Localidade()
         {
 

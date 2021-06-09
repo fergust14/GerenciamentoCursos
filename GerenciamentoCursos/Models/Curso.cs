@@ -8,8 +8,7 @@ namespace GerenciamentoCursos.Models
     public class Curso
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
-        public ICollection<Oferta> Disponibilidade { get; set; } = new List<Oferta>();
+        public string Nome { get; set; }        
         public Tipo Tipo { get; set; }
         public int TipoId { get; set; }
 
@@ -22,15 +21,6 @@ namespace GerenciamentoCursos.Models
             Id = id;
             Nome = nome;
             Tipo = tipo;
-        }
-
-        public void AdicionarOferta(Oferta oferta)
-        {
-            Disponibilidade.Add(oferta);
-        }
-        public void RemoverOferta(Oferta oferta)
-        {
-            Disponibilidade.Remove(oferta);
         }
     }
 }

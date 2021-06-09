@@ -44,6 +44,7 @@ namespace GerenciamentoCursos
             services.AddScoped<OfertaService>();
             services.AddScoped<TipoService>();
             services.AddScoped<CursoService>();
+            services.AddScoped<LocalidadeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
