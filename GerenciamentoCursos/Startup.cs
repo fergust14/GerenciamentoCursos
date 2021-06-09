@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GerenciamentoCursos.Data;
+using GerenciamentoCursos.Services;
 
 namespace GerenciamentoCursos
 {
@@ -39,6 +40,9 @@ namespace GerenciamentoCursos
             services.AddDbContext<GerenciamentoCursosContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("GerenciamentoCursosContext"), builder =>
                         builder.MigrationsAssembly("GerenciamentoCursos")));
+
+            services.AddScoped<OfertaService>();
+            services.AddScoped<TiposService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
