@@ -37,7 +37,8 @@ namespace GerenciamentoCursos
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<GerenciamentoCursosContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("GerenciamentoCursosContext")));
+                    options.UseMySql(Configuration.GetConnectionString("GerenciamentoCursosContext"), builder =>
+                        builder.MigrationsAssembly("GerenciamentoCursos")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
