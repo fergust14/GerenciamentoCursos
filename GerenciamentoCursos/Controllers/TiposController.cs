@@ -14,15 +14,15 @@ namespace GerenciamentoCursos.Controllers
 {
     public class TiposController : Controller
     {
-        private readonly TipoService _tiposService;
+        private readonly TipoService _tipoService;
         
-        public TiposController(TipoService tiposService)
+        public TiposController(TipoService tipoService)
         {
-            _tiposService = tiposService;           
+            _tipoService = tipoService;           
         }
         public IActionResult Index()
         {
-            var list = _tiposService.FindAll();
+            var list = _tipoService.FindAll();
 
             return View(list);
         }
@@ -34,7 +34,27 @@ namespace GerenciamentoCursos.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Tipo tipos)
         {
-            _tiposService.Insert(tipos);
+            _tipoService.Insert(tipos);
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var obj = _tipoService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _tipoService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }

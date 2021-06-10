@@ -24,5 +24,15 @@ namespace GerenciamentoCursos.Services
             _context.Add(obj);
             _context.SaveChanges();
         }
+        public Tipo FindById(int id)
+        {
+            return _context.Tipo.FirstOrDefault(obj => obj.Id == id);
+        }
+        public void Remove(int id)
+        {
+            var obj = _context.Tipo.Find(id);
+            _context.Tipo.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }

@@ -37,5 +37,25 @@ namespace GerenciamentoCursos.Controllers
             _localidadeService.Insert(localidade);
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var obj = _localidadeService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _localidadeService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

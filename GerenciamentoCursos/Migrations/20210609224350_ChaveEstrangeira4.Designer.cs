@@ -2,14 +2,16 @@
 using GerenciamentoCursos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GerenciamentoCursos.Migrations
 {
     [DbContext(typeof(GerenciamentoCursosContext))]
-    partial class GerenciamentoCursosContextModelSnapshot : ModelSnapshot
+    [Migration("20210609224350_ChaveEstrangeira4")]
+    partial class ChaveEstrangeira4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
