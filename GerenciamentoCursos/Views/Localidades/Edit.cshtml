@@ -1,6 +1,6 @@
 ﻿@model GerenciamentoCursos.Models.ViewModels.LocalidadeFormViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -8,7 +8,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Localidade.Id" />
             <div class="form-group">
                 <label asp-for="Localidade.Cidade" class="control-label"></label>
                 <input asp-for="Localidade.Cidade" class="form-control" />
@@ -18,7 +19,7 @@
                 <select asp-for="Localidade.Estado" asp-items="@Model.Estados" class="form-control"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default">
+                <input type="submit" value="Save" class="btn btn-default">
             </div>
         </form>
     </div>

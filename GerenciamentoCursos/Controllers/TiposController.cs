@@ -9,6 +9,7 @@ using GerenciamentoCursos.Data;
 using GerenciamentoCursos.Models;
 using GerenciamentoCursos.Services;
 using GerenciamentoCursos.Models.ViewModels;
+using GerenciamentoCursos.Services.Exceptions;
 
 namespace GerenciamentoCursos.Controllers
 {
@@ -56,6 +57,43 @@ namespace GerenciamentoCursos.Controllers
         {
             _tipoService.Remove(id);
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _tipoService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            TipoFormViewModel viewModel = new TipoFormViewModel { Tipo = obj };
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Tipo tipo)
+        {
+            if(id != tipo.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _tipoService.Update(tipo);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using GerenciamentoCursos.Data;
 using GerenciamentoCursos.Models;
 using GerenciamentoCursos.Services;
 using GerenciamentoCursos.Models.ViewModels;
+using GerenciamentoCursos.Services.Exceptions;
 
 namespace GerenciamentoCursos.Controllers
 {
@@ -31,13 +32,19 @@ namespace GerenciamentoCursos.Controllers
         }
         public IActionResult Create()
         {
+            
             var cursos = _cursoService.FindAll();
             var localidades = _localidadeService.FindAll();
             var viewModel1 = new OfertaFormViewModel
             {
                 Localidades = localidades,
-                Cursos = cursos                
-            };            
+                Cursos = cursos,
+                Status = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Incrições Abertas", Value = "Incrições Abertas"},
+                    new SelectListItem {Text = "Incrições Encerradas", Value = "Incrições Encerradas"}
+                }
+            };
             return View(viewModel1);
         }
         [HttpPost]
@@ -66,6 +73,51 @@ namespace GerenciamentoCursos.Controllers
         {
             _ofertaService.Remove(id);
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _ofertaService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            List<Localidade> localidades = _localidadeService.FindAll();
+            List<Curso> cursos = _cursoService.FindAll();
+            OfertaFormViewModel viewModel = new OfertaFormViewModel { Oferta = obj, Localidades = localidades, Cursos = cursos,
+                Status = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Incrições Abertas", Value = "Incrições Abertas"},
+                    new SelectListItem {Text = "Incrições Encerradas", Value = "Incrições Encerradas"}
+                }
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Curso curso)
+        {
+            if (id != curso.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _cursoService.Update(curso);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

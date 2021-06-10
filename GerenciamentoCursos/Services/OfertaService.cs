@@ -1,5 +1,6 @@
 ﻿using GerenciamentoCursos.Data;
 using GerenciamentoCursos.Models;
+using GerenciamentoCursos.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,22 @@ namespace GerenciamentoCursos.Services
             var obj = _context.Oferta.Find(id);
             _context.Oferta.Remove(obj);
             _context.SaveChanges();
+        }
+        public void Update(Oferta obj)
+        {
+            if (!_context.Tipo.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id não encontrado.");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
