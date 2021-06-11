@@ -38,7 +38,7 @@ namespace GerenciamentoCursos.Services
         }
         public void Update(Localidade obj)
         {
-            if (!_context.Tipo.Any(x => x.Id == obj.Id))
+            if (!_context.Localidade.Any(x => x.Id == obj.Id))
             {
                 throw new NotFoundException("Id não encontrado.");
             }

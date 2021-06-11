@@ -28,7 +28,7 @@ namespace GerenciamentoCursos.Services
         }
         public Oferta FindById(int id)
         {
-            return _context.Oferta.Include(obj => obj.Localidade).FirstOrDefault(obj => obj.Id == id);
+            return _context.Oferta.FirstOrDefault(obj => obj.Id == id);
         }
         public void Remove(int id)
         {
@@ -38,7 +38,7 @@ namespace GerenciamentoCursos.Services
         }
         public void Update(Oferta obj)
         {
-            if (!_context.Tipo.Any(x => x.Id == obj.Id))
+            if (!_context.Oferta.Any(x => x.Id == obj.Id))
             {
                 throw new NotFoundException("Id não encontrado.");
             }

@@ -99,15 +99,15 @@ namespace GerenciamentoCursos.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Curso curso)
+        public IActionResult Edit(int id, Oferta oferta)
         {
-            if (id != curso.Id)
+            if (id != oferta.Id)
             {
                 return BadRequest();
             }
             try
             {
-                _cursoService.Update(curso);
+                _ofertaService.Update(oferta);
                 return RedirectToAction(nameof(Index));
             }
             catch (NotFoundException)
